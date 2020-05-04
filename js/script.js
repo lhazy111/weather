@@ -33,7 +33,7 @@ function selectedValue(e) {
         }
     }
     console.log('zapisany obiekt', city_choice);
-    showMap(city_choice.coord.lon, city_choice.coord.lat);
+    //showMap(city_choice.coord.lon, city_choice.coord.lat);
     loadWeather(city_choice.id);
 }
 
@@ -49,7 +49,7 @@ function getCityId(e) {
 
 
 function cities_list(city) {
-    fetch('city.list.json')
+    fetch('json/city.list.json')
         .then(res => res.json())
         .then(data => {
             //console.log('loaded cities:', data);
@@ -131,7 +131,18 @@ function showMap(lon, lat) {
 }
 
 function display_data() {
-
+    console.log('display data started');
+    console.log(`<img src='http://openweathermap.org/img/wn/10d@2x.png'></img>`);
+    let weather_message = `<h5>${weather_report.name}</h5>` +
+        `<h5>${weather_report.sys.country}</h5>` +
+        `<h5>${weather_report.coord.lon} ${weather_report.coord.lat}` +
+        `<h5>${weather_report.weather[0].description}` +
+        `<h5>${weather_report.main.temp}` +
+        `<h5>${weather_report.main.temp_min}` +
+        `<h5>${weather_report.main.temp_max}` +
+        `<h5>${weather_report.main.feels_like}` +
+        `<h5>${weather_report.main.pressure}`;
+    document.getElementById('weather_from_api').innerHTML = weather_message;
 }
 
 

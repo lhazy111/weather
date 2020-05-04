@@ -1,6 +1,6 @@
 
 #landing{
-background: url(./weather-bg.jpg);
+background: url("../img/weather-bg.jpg") ;
 background-attachment: fixed;
 background-repeat: no-repeat;
 background-size: cover;
