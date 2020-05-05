@@ -120,6 +120,7 @@ function showMap(lon, lat) {
 }
 
 function display_data() {
+    bg_change(weather_report.weather[0].id)
     console.log('display data started');
     console.log(`<img src='http://openweathermap.org/img/wn/10d@2x.png'></img>`);
     //displaying data from api----------------------------------------------------------------
@@ -134,5 +135,26 @@ function display_data() {
     document.getElementById('api_pressure').innerHTML = weather_report.main.pressure;
 }
 
-
+function bg_change(code) {
+    console.log('bg_change function, code', code, typeof (code));
+    if (code >= 200 & code < 300) {
+        document.getElementById('landing').style.backgroundImage = "url('img/200.jpg')";
+    } else if (code >= 300 & code < 400) {
+        document.getElementById('landing').style.backgroundImage = "url('img/300.jpg')";
+    } else if (code >= 500 & code < 600) {
+        document.getElementById('landing').style.backgroundImage = "url('img/500.jpg')";
+    } else if (code >= 600 & code < 700) {
+        document.getElementById('landing').style.backgroundImage = "url('img/600.jpg')";
+    } else if (code === 800) {
+        document.getElementById('landing').style.backgroundImage = "url('img/800.jpg')";
+    } else if (code === 801) {
+        document.getElementById('landing').style.backgroundImage = "url('img/801.jpg')";
+    } else if (code === 802) {
+        document.getElementById('landing').style.backgroundImage = "url('img/802.jpg')";
+    } else if (code === 803) {
+        document.getElementById('landing').style.backgroundImage = "url('img/803.jpg')";
+    } else if (code === 804) {
+        document.getElementById('landing').style.backgroundImage = "url('img/804.jpg')";
+    }
+}
 
