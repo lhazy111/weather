@@ -11,19 +11,22 @@
 "name":"London",
 "co d":200}*/
 //let city_list =
-let weather_report = {};
-let city_choice = {};
-let cities = [];
-let city_choice_output = '<option>-----choose one-------</option>';
-const weather_data_box = document.getElementById("data-display");
-const city_choice_box = document.getElementById("select_place");
-document.getElementById("select_place").style.display = "none";
+let weather_report = {};//object with data from api
+let city_choice = {};   //object for city data for api request
+let cities = [];        //array of cities filtered from json
+
+const weather_data_box = document.getElementById("data-display");//container for map and api answer
+weather_data_box.hidden = true;// initially hidden
+const city_choice_box = document.getElementById("city_choice");
+const city_choice_container = document.getElementById("select_place");
+city_choice_container.hidden = true;
 document.getElementById('city').addEventListener('submit', getCityId);
 document.getElementById('select_place').addEventListener('change', selectedValue);
 
 //showMap(16.338499, 50.872501);
 
 function selectedValue(e) {
+
     console.log('poszukiwane', e.target.value);
     for (let i = 0; i < cities.length; i++) {
         console.log(i, cities[i].id);
@@ -33,7 +36,8 @@ function selectedValue(e) {
         }
     }
     console.log('zapisany obiekt', city_choice);
-    //showMap(city_choice.coord.lon, city_choice.coord.lat);
+
+    showMap(city_choice.coord.lon, city_choice.coord.lat);
     loadWeather(city_choice.id);
 }
 
@@ -49,6 +53,10 @@ function getCityId(e) {
 
 
 function cities_list(city) {
+    city_choice_container.hidden = false;
+    console.log('cleaning cities array');
+    let city_choice_output = '<option>-----choose one-------</option>';
+    cities = [];
     fetch('json/city.list.json')
         .then(res => res.json())
         .then(data => {
@@ -64,11 +72,10 @@ function cities_list(city) {
             console.log(cities);
 
             city_choice_box.innerHTML = city_choice_output;
-            document.getElementById("select_place").style.display = "initial";
 
 
         })
-        .catch(err => console.error(err));
+        .catch(err => console.log(err));
 }
 
 
@@ -96,29 +103,11 @@ function loadWeather(id) {
     request.send();
 }
 
-/*let xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.github.com/users');
-console.log('onreadystatechange: ', xhr.onreadystatechange)
 
-// request state change event
-xhr.onload = function () {
-
-    // request completed?
-    if (xhr.readyState !== 4) return;
-
-    if (xhr.status === 200) {
-        // request successful - show response
-        console.log('xml resp ok', xhr.responseText);
-    }
-    else {
-        // request error
-        console.log('HTTP error', xhr.status, xhr.statusText);
-    }
-};
-xhr.send();
-*/
 function showMap(lon, lat) {
-    mapboxgl.accessToken = 'pk.eyJ1IjoibGhhenkxMTEiLCJhIjoiY2s5c2UwZWp0MDFwYzNubGoxeGJ5cGhnayJ9.YLFn6W3kM6jbxOSsxcOwYQ';
+    console.log("map function");
+    weather_data_box.hidden = false;
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGhhenkxMTEiLCJhIjoiY2s5dHBxZnBjMDBtZzNmczN4ejAyN2NrbiJ9.J4GKXNr2A_vGhv4p7yuQWA';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -133,16 +122,16 @@ function showMap(lon, lat) {
 function display_data() {
     console.log('display data started');
     console.log(`<img src='http://openweathermap.org/img/wn/10d@2x.png'></img>`);
-    let weather_message = `<h5>${weather_report.name}</h5>` +
-        `<h5>${weather_report.sys.country}</h5>` +
-        `<h5>${weather_report.coord.lon} ${weather_report.coord.lat}` +
-        `<h5>${weather_report.weather[0].description}` +
-        `<h5>${weather_report.main.temp}` +
-        `<h5>${weather_report.main.temp_min}` +
-        `<h5>${weather_report.main.temp_max}` +
-        `<h5>${weather_report.main.feels_like}` +
-        `<h5>${weather_report.main.pressure}`;
-    document.getElementById('weather_from_api').innerHTML = weather_message;
+    //displaying data from api----------------------------------------------------------------
+    document.getElementById('api_city').innerHTML = weather_report.name;
+    document.getElementById('api_country').innerHTML = weather_report.sys.country;
+    document.getElementById('api_coords').innerHTML = `${weather_report.coord.lon}, ${weather_report.coord.lat}`;
+    document.getElementById('api_weather').innerHTML = weather_report.weather[0].description;
+    document.getElementById('api_temp').innerHTML = weather_report.main.temp;
+    document.getElementById('api_temp_min').innerHTML = weather_report.main.temp_min;
+    document.getElementById('api_temp_max').innerHTML = weather_report.main.temp_max;
+    document.getElementById('api_feels').innerHTML = weather_report.main.feels_like;
+    document.getElementById('api_pressure').innerHTML = weather_report.main.pressure;
 }
 
 

@@ -14,66 +14,103 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
     <title>Weather!</title>
+    <!--fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid" id="landing">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="landing">
         <h1 class="display-2 text-white py-2 text-center">Weather page</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col d-flex justify-content-center">
-                    <form class="form-inline" id="city">
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="inputCity" class="sr-only">City</label>
-                            <input type="text" class="form-control" id="inputCity" placeholder="London, UK">
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                    </form>
-                </div>
+        <!-- input city-->
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <form class="form-inline" id="city">
+                    <label for="inputCity" class="sr-only">City</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="City">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-            <div class="row" id="city_choice">
-                <select id="select_place" class="form-control form-control-sm">
+        </div>
+        <!--input city end-->
 
-                </select>
-            </div>
-            <div class="row pt-2">
-                <div class="col-sm-6 bg-secondary">
-                    <div id='map'></div>
-                </div>
-                <div class="col-sm-6 bg-success">
-                    <div class="row">
-                        <div class="col-sm-6 bg-secondary text-right">
-                            <h5>City: </h5>
-                            <h5>Country: </h5>
-                            <h5>Coordinates: </h5>
-                            <h5>Weather:</h5>
-                            <h5>Temperature: </h5>
-                            <h5>Temp.min: </h5>
-                            <h5>Temp.max: </h5>
-                            <h5>Feels like: </h5>
-                            <h5>Pressure: </h5>
-                        </div>
-                        <div class="col-sm-6 bg-warning" id="weather_from_api">
-                        </div>
-                    </div>
+        <!--choose city dropdown-->
+        <div class="row my-3" id="select_place">
+            <div class="col d-flex justify-content-center">
+                <div class="form-group">
+                    <select multiple size='2' class="form-control" id="city_choice">
+                    </select>
                 </div>
             </div>
+        </div>
+        <!--choose city dropdown end-->
+        <div class="container" id='data-display'>
+
+
+
+            <!--container with map and weather data from api-->
+            <div class="row pt-2 m-5 transparent">
+
+                <!--map with marker column-->
+                <div id='map' class="col-md-6 bg-primary  p-2">
+                    <img src="./img/map.jpg" alt="" class="img img-fluid">
+                </div>
+                <!--map with marker column END-->
+
+                <!-- weather data from api column-->
+                <div id="weather_from_api" class="col-md-6 p-2  bg-secondary">
+                    <table class="table table-hover table-borderless table-sm text-uppercase text-white">
+                        <tbody">
+                            <thead>
+                                <tr>
+                                    <th class="font-weight-bold bg-dark">City:</th>
+                                    <th id="api_city" class="font-weight-bold bg-dark"></th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>Country:</td>
+                                <td id="api_country"></td>
+                            </tr>
+                            <tr>
+                                <td>Coordinates:</td>
+                                <td id="api_coords"></td>
+                            </tr>
+                            <tr>
+                                <td>Weather:</td>
+                                <td id="api_weather"></td>
+                            </tr>
+                            <tr>
+                                <td>Temperature:</td>
+                                <td id="api_temp"></td>
+                            </tr>
+                            <tr>
+                                <td>Temp.min:</td>
+                                <td id="api_temp_min"></td>
+                            </tr>
+                            <tr>
+                                <td>Temp.max:</td>
+                                <td id="api_temp_max"></td>
+                            </tr>
+                            <tr>
+                                <td>Feels like:</td>
+                                <td id="api_feels"></td>
+                            </tr>
+                            <tr>
+                                <td>Pressure:</td>
+                                <td id="api_pressure"></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <!-- weather data from api column END-->
+            </div>
+            <!--container with map and weather data from api END-->
 
         </div>
 
     </div>
-    <!--div class="row">
-                <div class="col-md-6">
-                    <img src="./narendra-modi-2594.png" alt="" class="img img-fluid">
-                </div>
 
-                <div class="col-md-6 bg-success text-uppercase text-white transparent" id="data-display">
-                    <h1>weather data:</h1>
-                </div>
 
-            </div-->
-    </div>
-    </div>
 
 
     <!-- Optional JavaScript -->

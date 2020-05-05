@@ -5,10 +5,16 @@ background-attachment: fixed;
 background-repeat: no-repeat;
 background-size: cover;
 min-height: 100vh;
+font-family: 'Baloo Bhaina 2', cursive;;
+}
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+    text-shadow: 0px 3px 5px black
 
 }
 
 .transparent{
-    opacity: .7;
+    opacity: .9;
 }
 
