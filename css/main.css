@@ -17,4 +17,8 @@ h1 {
 .transparent{
     opacity: .9;
 }
+#botrtom-footer {
+position: absolute ;
+  bottom: 10px;
+  }
 
