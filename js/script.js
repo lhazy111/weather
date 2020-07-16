@@ -27,16 +27,12 @@ document.getElementById('select_place').addEventListener('change', selectedValue
 
 function selectedValue(e) {
 
-    console.log('poszukiwane', e.target.value);
     for (let i = 0; i < cities.length; i++) {
-        console.log(i, cities[i].id);
         if (cities[i].id == e.target.value) {
             console.log('id found', e.target.value, cities[i].id);
             city_choice = Object.assign(city_choice, cities[i]);
         }
     }
-    console.log('zapisany obiekt', city_choice);
-
     showMap(city_choice.coord.lon, city_choice.coord.lat);
     loadWeather(city_choice.id);
 }
@@ -69,7 +65,6 @@ function cities_list(city) {
                     //console.log(i, city_choice_output);
                 }
             };
-            console.log(cities);
 
             city_choice_box.innerHTML = city_choice_output;
 
